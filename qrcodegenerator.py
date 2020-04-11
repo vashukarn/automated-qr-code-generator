@@ -7,6 +7,7 @@ import csv
 # Path of the csv file from which data is extracted
 reader = csv.DictReader(open(r'C:\Users\Venom\Downloads\halwa.csv')) 
 print("Program Started")
+driver = webdriver.Chrome(r"D:\chromedriver\chromedriver.exe")
 driver.maximize_window()
 # we will be using a site named qr code-monkey.com
 driver.get("https://www.qrcode-monkey.com/#text")
