@@ -27,7 +27,7 @@ def sheet(sheet):
 
 def download():
     driver.find_element_by_class_name('btn-success').click()
-    sleep(3)
+    sleep(4)
     driver.find_element_by_xpath(
         '/html/body/div[2]/div[2]/div[2]/div/div/div[2]/div[2]/div[4]/button[2]').click()
 
@@ -46,7 +46,7 @@ def main():
         driver.find_element_by_id('qrcodeText').send_keys(data)
         sleep(1)
         download()
-        print('QR Code no : ' + i + ' Downloaded')
+        print('QR Code no : ' + str(i) + ' Downloaded')
         data = ''
 
 
