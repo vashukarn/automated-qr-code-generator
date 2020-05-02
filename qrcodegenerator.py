@@ -1,31 +1,67 @@
 from selenium import webdriver
-import time
+from time import sleep
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
 import csv
 
-# Install selenium browser in case you don't have it preinstalled it before
+# Taking data from sheet
 
-# Path of the csv file from which data is extracted
-reader = csv.DictReader(open(r'C:\Users\Venom\Downloads\halwa.csv')) 
-print("Program Started")
-driver = webdriver.Chrome(r"D:\chromedriver\chromedriver.exe")
-driver.maximize_window()
-# we will be using a site named qr code-monkey.com
-driver.get("https://www.qrcode-monkey.com/#text")
-time.sleep(3)
-for raw in reader:
-    # the columns to be imported
-    enroll = raw.get('Enroll ID')
-    name = raw.get('Name')
-    father = raw.get("Father's Name")
-    address = raw.get('Address')
-    phone = raw.get('Phone')
-    cls = raw.get('Class')
-    # format in which we need to store data in a qr code
-    halwa = 'Enrollment Number : ', enroll, '\n', 'Name : ', name, '\n', "Father's Name : ", father, '\n', 'Address : ', address, '\n', 'Phone : ', phone, '\n', 'Class : ', cls, '\n'
-    print(enroll)
-    driver.find_element_by_name("qrcodeText").clear()
-    driver.find_element_by_name("qrcodeText").send_keys(halwa)
-    driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[2]/div/div/div[2]/div[2]/div[4]/button[1]").click()
-    time.sleep(2)
-    driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[2]/div/div/div[2]/div[2]/div[4]/button[2]").click()
-    time.sleep(2)
+
+def sheet(sheet):
+    file = open(sheet, mode='rt')
+    reader = csv.reader(file)
+    rownum = 0
+    val = []
+    for row in reader:
+        # Save header row.
+        if rownum == 0:
+            header = row
+        # save other data
+        else:
+            val.append(row)
+        rownum += 1
+
+    file.close()
+    return (header, val)
+
+
+def download():
+    driver.find_element_by_class_name('btn-success').click()
+    sleep(3)
+    driver.find_element_by_xpath(
+        '/html/body/div[2]/div[2]/div[2]/div/div/div[2]/div[2]/div[4]/button[2]').click()
+
+
+def main():
+    data = ''
+    driver.maximize_window()
+    driver.get('https://www.qrcode-monkey.com/#text')
+    for i in range(len(value)):
+        for j in range(len(topic)):
+            if (j == 0):
+                data = str(topic[j]) + ' : ' + str(value[i][j])
+            else:
+                data = data + '\n' + str(topic[j]) + ' : ' + str(value[i][j])
+        driver.find_element_by_id('qrcodeText').clear()
+        driver.find_element_by_id('qrcodeText').send_keys(data)
+        sleep(1)
+        download()
+        print('QR Code no : ' + i + ' Downloaded')
+        data = ''
+
+
+# Enter filename here
+sheetname = str(input('Input csv file name : '))
+# Taking data by header and value
+topic, value = sheet(sheetname)
+print('Opening QR CODE GENERATOR SITE')
+
+chrome_options = Options()
+# Uncomment two lines down if you don't want chrome window to popup and go headless
+# chrome_options.add_argument('--headless')
+# chrome_options.add_argument('--disable-gpu')
+
+
+driver = webdriver.Chrome(chrome_options=chrome_options)
+driver.implicitly_wait(10)
+main()
