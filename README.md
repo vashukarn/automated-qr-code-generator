@@ -6,9 +6,7 @@
 
 ## General Information
 
-This script helps automating browser using selenium to generate qr codes taking data from csv file.
-It is a python automated script that creates qr codes according to the data provided in csv file at once.
-I used the selenium web browser to generate qr codes from https://www.qrcode-monkey.com/#text
+This script helps to automate browser using selenium to generate QR codes taking data from CSV file. It is a python automated script that creates QR codes according to the data provided in CSV file at once. I used the selenium web browser to generate QR codes.
 
 ## Prerequisites
 
