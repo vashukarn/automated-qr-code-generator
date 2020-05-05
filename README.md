@@ -12,7 +12,10 @@ This script helps to automate browser using selenium to generate QR codes taking
 
 These should run without any error: <br>
 
-- Selenium Module should be installed <br>
+- All modules according to requirements <br>
+```
+pip install -r requirements.txt
+```
 - Chrome webdriver should be installed <br>
 - Path of Chrome Browser should be added to PATH <br>
 - Make sure the file is in csv format (If not you can change your file into csv using some available online tools.) <br>
