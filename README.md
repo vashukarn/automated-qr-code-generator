@@ -23,6 +23,7 @@ from selenium import webdriver
 import time
 import csv
 ```
+
 #### Taking data from CSV Files
 
 ```sh
@@ -43,6 +44,7 @@ def sheet(sheet):
     file.close()
     return (header, val)
 ```
+
 #### We enter data using two for loops as we have taken data into two lists : Topic and Value
 
 ```sh
